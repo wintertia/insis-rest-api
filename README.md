@@ -8,7 +8,7 @@
 | Dionisius Marcell Putra Indranto | 5027231044 |
 | Tio Axellino Irin | 5027231065 |
 
-## Petunjuk
+## Petunjuk (Backend)
 
 Sebelum mulai lakukan:
 
@@ -16,7 +16,7 @@ Sebelum mulai lakukan:
 npm install
 ```
 
-Lalu, buatlah `.env` file di root folder dengan template:
+Lalu, buatlah `.env` file di root folder backend dengan template:
 
 ```
 DATABASE_URI=mongodb+srv://[username]:[password]@[cluster-name]/[db-name]?retryWrites=true&w=majority&appName=[]
