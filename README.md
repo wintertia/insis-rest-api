@@ -25,7 +25,7 @@ DATABASE_URI=mongodb+srv://[username]:[password]@[cluster-name]/[db-name]?retryW
 Nyalakan backend dengan:
 
 ```
-npm start:dev
+npm run start:dev
 ```
 
 ## Petunjuk (Frontend)
