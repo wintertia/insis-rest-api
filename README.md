@@ -28,3 +28,17 @@ Nyalakan backend dengan:
 npm start:dev
 ```
 
+## Petunjuk (Frontend)
+
+Sebelum mulai lakukan:
+
+```
+npm install
+```
+
+Nyalakan frontend dengan:
+
+```
+npm run dev
+```
+
