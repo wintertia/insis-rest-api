@@ -363,3 +363,21 @@ body {
 .btn-warning:hover {
   background-color: #d97706;
 }
+
+.confirmation-modal {
+  max-width: 24rem;
+}
+
+.confirmation-message {
+  margin: 1rem 0;
+  color: #374151;
+}
+
+.btn-danger {
+  background-color: #dc2626;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #b91c1c;
+}

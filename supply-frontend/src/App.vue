@@ -233,6 +233,31 @@
         </form>
       </div>
     </div>
+
+    <!-- Confirmation Modal -->
+    <div v-if="showConfirmModal" class="modal-overlay">
+      <div class="modal confirmation-modal">
+        <h3 class="modal-title">Confirm Action</h3>
+        <p class="confirmation-message">{{ confirmMessage }}</p>
+        
+        <div class="modal-actions">
+          <button 
+            type="button" 
+            class="btn btn-secondary" 
+            @click="showConfirmModal = false"
+          >
+            Cancel
+          </button>
+          <button 
+            type="button" 
+            class="btn btn-danger" 
+            @click="handleConfirm"
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -268,6 +293,9 @@ const transactionMode = ref<'use' | 'restock'>('use');
 const showTransactionModal = ref(false);
 const selectedSupply = ref<Supply | null>(null);
 const transactionQty = ref(1);
+const showConfirmModal = ref(false);
+const confirmMessage = ref('');
+const confirmAction = ref<() => Promise<void>>(() => Promise.resolve());
 
 const formData = reactive({
   name: '',
@@ -364,7 +392,7 @@ const handleEdit = (supply: Supply) => {
 };
 
 const handleDelete = async (id: string) => {
-  if (confirm('Are you sure you want to delete this supply?')) {
+  const deleteAction = async () => {
     try {
       const response = await fetch(`${BASE_URL}/supply/${id}`, {
         method: 'DELETE'
@@ -381,7 +409,9 @@ const handleDelete = async (id: string) => {
       showAlert('Error deleting supply', 'error');
       console.error('Error:', error);
     }
-  }
+  };
+  
+  confirm('Are you sure you want to delete this supply?', deleteAction);
 };
 
 const openTransactionModal = (supply: Supply, mode: 'use' | 'restock') => {
@@ -433,6 +463,17 @@ const handleTransaction = async () => {
     }
     console.error('Transaction error:', error);
   }
+};
+
+const confirm = (message: string, action: () => Promise<void>): void => {
+  confirmMessage.value = message;
+  confirmAction.value = action;
+  showConfirmModal.value = true;
+};
+
+const handleConfirm = async (): Promise<void> => {
+  showConfirmModal.value = false;
+  await confirmAction.value();
 };
 
 const cancelEdit = () => {
